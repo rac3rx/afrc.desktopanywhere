@@ -1,0 +1,2 @@
+wget https://dl.dod.cyber.mil/wp-content/uploads/pki-pke/zip/certificates_pkcs7_DoD.zip
+for i in *.der.p7b; do certutil -d sql:$HOME/.pki/nssdb -A -t TC -n ${i} -i ${i}; done

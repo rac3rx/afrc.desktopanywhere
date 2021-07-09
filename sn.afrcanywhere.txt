@@ -1,0 +1,48 @@
+afrcdesktops.us.af.mil
+yum -y install nss-tools unzip openssl dos2unix
+yum -y install opensc
+yum -y update && yum -y upgrade
+yum -y install rdesktop
+yum -y install libXScrnSaver libpng12 
+
+
+p11-kit list-modules
+
+wget https://dl.dod.cyber.mil/wp-content/uploads/pki-pke/zip/certificates_pkcs7_DoD.zip
+
+# https://medium.com/@blessymoses17/install-vmware-horizon-client-in-fedora-30-e584344bdce5
+# Install VMware Horizon Client in Fedora 30
+# Steps to install VMware Horizon client for Linux
+
+# 1. Install the pre-requisite libraries
+dnf install libpng12
+
+# 2. Create the symbolic links for libudev.so.0 and libffi.so.5 libraries
+sudo ln -s /usr/lib64/libudev.so.1 /usr/lib64/libudev.so.0
+sudo ln -s /usr/lib64/libffi.so.6 /usr/lib64/libffi.so.5
+
+# 3. Download install bundle fromwget
+-ct3 https://download3.vmware.com/software/view/viewclients/CART22FQ1/VMware-Horizon-Client-2103-8.2.0-17742757.x64.bundle
+# 4. Install the client using the bundle downloaded from VMware website
+sh VMware-Horizon-Client-4.10.0–11053294.x64.bundle$ ./VMware-Horizon-Client-4.10.0–11053294.x64.bundle
+
+# 5. Launch the client
+LD_LIBRARY_PATH=/usr/lib/vmware /usr/lib/vmware/view/bin/vmware-view
+
+
+
+
+
+for i in *.der.p7b; do certutil -d sql:/home/rac3rx/.pki/nssdb -A -t TC -n Certificates_PKCS7_v5.8_DoD_DoD_Root_CA_5.der.p7b -i Certificates_PKCS7_v5.8_DoD_DoD_Root_CA_5.der.p7b; done
+cat > test.cert.install.bash.txt
+
+sudo bash ~/Downloads/VMware-Horizon-Client-2103-8.2.0-17742757.x64.bundle
+# rhel6: /usr/local/share/ca-certificates
+# rhel6: /etc/pki/ca-trust/source/anchors/
+sudo cp Documents/certs_-_os.cert.trust/D* /etc/pki/ca-trust/source/anchors/
+sudo update-ca-trust
+mkdir -p /usr/lib/vmware/view/pkcs11/
+# sudo ln -s /usr/lib/x86_64-linux-gnu/opensc-pkcs11.so /usr/lib/vmware/view/pkcs11/libopenscpkcs11.so
+sudo ln -s /usr/lib64/opensc-pkcs11.so /usr/lib/vmware/view/pkcs11/libopenscpkcs11.so
+less /tmp/vmware-rac3rx/vmware-horizon-client-96656.log
+
