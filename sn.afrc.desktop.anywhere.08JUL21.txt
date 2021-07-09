@@ -1,0 +1,242 @@
+AFRC - Desktop Anywhere aka vmware horizon client
+
+    URL
+        https://afrcdesktops.us.af.mil
+    Prerequisites
+        VMware Workstation
+            Verify that VMware Workstation is not installed on the client system.
+        Python
+            Confirm that version 2.x or 3.x of Python is installed on the client system.
+    System Requirements for Linux Client Systems
+    https://docs.vmware.com/en/VMware-Horizon-Client-for-Linux/2103/horizon-client-linux-installation/GUID-DF3FBF68-3C78-45AA-9503-202BD683408F.html#GUID-DF3FBF68-3C78-45AA-9503-202BD683408F
+        OpenSSL requirement
+            Horizon Client requires a specific version of OpenSSL. The correct version is automatically downloaded and installed.
+        Display protocol
+            VMware Blast
+            PCoIP
+            RDP
+        Other software requirements/Libraries
+            The following list of requirements pertains only to Ubuntu distributions.
+                libudev.so.0
+            Note:
+                libudev0 is required to run Horizon Client. By default, libudev0 is not installed in some systems.
+                To support idle session timeouts: libXsso.so.1.
+                To improve performance when using multiple monitors, enable Xinerama.
+
+    Install and Configure FreeRDP
+    https://docs.vmware.com/en/VMware-Horizon-Client-for-Linux/2103/horizon-client-linux-installation/GUID-0E4722DA-8642-41D8-A077-2768360B1269.html#GUID-0E4722DA-8642-41D8-A077-2768360B1269
+    
+    FreeRDP Compilation
+    https://github.com/FreeRDP/FreeRDP/wiki/Compilation
+    Installation Options
+    https://docs.vmware.com/en/VMware-Horizon-Client-for-Linux/2103/horizon-client-linux-installation/GUID-DE283634-D0D4-45C2-B0C8-E203CAC0E38B.html#GUID-DE283634-D0D4-45C2-B0C8-E203CAC0E38B
+        Client Drive Redirection
+            /usr/lib/vmware/view/vdpService/
+        HTML5 Multimedia Redirection (HTML5MMR)
+        Multimedia Redirection (MMR)
+            /usr/lib/vmware/view/vdpService/
+        Real-Time Audio-Video
+            /usr/lib/pcoip/vchan_plugins/
+        Scanner Redirection
+            sudo /etc/init.d/ftscanhv start
+        Seamless Window
+        Serial Port Redirection
+            sudo /etc/init.d/ftscanhv start
+            RS-232 ports (/dev/ttySxx) or USB-to-Serial adapters (/dev/ttyUSBxx)
+        Smart Card Redirection
+            /usr/lib/pcoip/vchan_plugins/
+        USB Redirection
+            /usr/lib/vmware/view/usb/
+            sudo /etc/init.d/vmware-USBArbitrator start 
+
+
+        
+        
+
+REF:
+https://docs.vmware.com/en/VMware-Horizon-Client-for-Linux/2103/horizon-client-linux-installation/GUID-F563F1E1-D9BD-4C42-80DC-4A3EB015FD65.html
+
+
+
+
+
+
+MISC NOTES:
+==============
+https://stackoverflow.com/questions/23410890/add-import-certificate-with-password-via-command-line-mac-os-x
+504  security import AllCerts.p7b -k ~/Library/Keychains/login.keychain-db
+  505  security import RootCert2.cer -k ~/Library/Keychains/login.keychain-db
+  506  security import RootCert3.cer -k ~/Library/Keychains/login.keychain-db
+  507  security import RootCert4.cer -k ~/Library/Keychains/login.keychain-db
+  508  security import RootCert5.cer -k ~/Library/Keychains/login.keychain-db
+  509  cd ../../pubic.cyber.mil/Certificates_PKCS7_v5.8_DoD/
+  510  security import DoD_PKE_PEM.pem -k ~/Library/Keychains/login.keychain-db
+  511  for i in `ls *.p7b`; do security import $i -k ~/Library/Keychains/login.keychain-db; done
+
+https://militarycac.com/macnotes.htm
+https://militarycac.com/maccerts/
+wget https://militarycac.com/maccerts/AllCerts.zip
+
+DOD EMAIL CA-33 through DOD EMAIL CA-34,
+
+DOD EMAIL CA-39 through DOD EMAIL CA-44,
+
+DOD EMAIL CA-49 through DOD EMAIL CA-52,
+
+DOD EMAIL CA-59,
+
+DOD ID CA-33 through DOD ID CA-34,
+
+DOD ID CA-39 through DOD ID CA-44,
+
+DOD ID CA-49 through DOD ID CA-52,
+
+DOD ID CA-59
+
+DOD ID SW CA-35 through DOD ID SW CA-38,
+
+DOD ID SW CA-45 through DOD ID SW CA-48,
+
+DoD Root CA 2 through DoD Root CA 5,
+
+DOD SW CA-53 through DOD SW CA-58, and
+
+DOD SW CA-60 through DOD SW CA-61
+
+
+vmware
+
+selct cert that isn't email eg:
+    DOD ID CA-43
+
+NOT
+    DOD EMAIL CA-43
+
+
+
+# https://medium.com/@blessymoses17/install-vmware-horizon-client-in-fedora-30-e584344bdce5
+# Install VMware Horizon Client in Fedora 30
+# Steps to install VMware Horizon client for Linux
+
+# 1. Install the pre-requisite libraries
+dnf install libpng12
+
+# 2. Create the symbolic links for libudev.so.0 and libffi.so.5 libraries
+ln -s /usr/lib64/libudev.so.1 /usr/lib64/libudev.so.0$ ln -s /usr/lib64/libffi.so.6 /usr/lib64/libffi.so.5
+
+# 3. Download install bundle fromwget
+-ct3 https://download3.vmware.com/software/view/viewclients/CART22FQ1/VMware-Horizon-Client-2103-8.2.0-17742757.x64.bundle
+# 4. Install the client using the bundle downloaded from VMware website
+sh VMware-Horizon-Client-4.10.0–11053294.x64.bundle$ ./VMware-Horizon-Client-4.10.0–11053294.x64.bundle
+
+# 5. Launch the client
+LD_LIBRARY_PATH=/usr/lib/vmware /usr/lib/vmware/view/bin/vmware-view
+
+https://gist.githubusercontent.com/pcurylo/e0893230d3f50f9143f97ba46b15add5/raw/392ece48af5b644b6ca36eee846c7ad1772c5948/install_horizon_2_fedora
+
+REF:
+afrcdesktops.us.af.mil
+https://www.aaronrombaut.com/prepare-ubuntu-18-04-for-desktop-anywhere/
+
+server/client
+https://rguske.github.io/post/a-linux-development-desktop-with-vmware-horizon-part-i-horizon/
+
+https://www.aaronrombaut.com/prepare-ubuntu-18-04-for-desktop-anywhere/
+https://medium.com/@blessymoses17/install-vmware-horizon-client-in-fedora-30-e584344bdce5
+afrcdesktops.us.af.mil
+https://www.youtube.com/watch?v=xfN9mAJt6VY&t=1s
+https://stackoverflow.com/questions/23410890/add-import-certificate-with-password-via-command-line-mac-os-x
+https://militarycac.com/macnotes.htm
+https://militarycac.com/maccerts/
+
+http://www.wmware.com/go/viewclients
+
+=========
+pkcs11
+=========
+pkcs11-tool --module opensc-pkcs11.so --list-slots
+yum install -y opensc pcsc-lite pcsc-lite-libs pcsc-lite-ccid nss-tools yum install gcc krb5-devel pam-devel autoconf libtool
+yum install -y opensc pcsc-lite pcsc-lite-libs pcsc-lite-ccid nss-tools
+yum install gcc krb5-devel pam-devel autoconf libtool
+rpm2cpio pam_krb5-2.4.8-6.el7.src.rpm | cpio –div
+tar xvzf pam_krb5-2.4.8.tar.gz
+cd pam_krb5-2.4.8
+./configure --prefix=/usr
+make
+make install
+
+Verify that pam_krb5.so exists under /usr/lib64/security/.
+
+Copy
+ls -l /usr/lib64/security | grep pam_krb5
+yum install pcsc-lite pcsc-lite-ccid pcsc-lite-libs
+yum install opensc
+
+RHEL 7/CentOS 7:
+
+Copy
+yum install pam_krb5 krb5-pkinit
+
+RHEL 8/CentOS 8:
+
+Copy
+yum install krb5-pkinit
+authconfig --enablekrb5 --update
+
+
+docker run cmd.cat/pkcs11-tool pkcs11-tool
+
+
+fedora
+pkg-config p11-kit-1 --variable p11_module_configs
+
+p11tool --list-tokens
+
+
+https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/security_hardening/configuring-applications-to-use-cryptographic-hardware-through-pkcs-11_security-hardening
+ssh-keygen -D pkcs11: > keys.pub
+
+ssh-copy-id -f -i keys.pub username@example.com
+
+ssh -i "pkcs11:id=%01?module-path=/usr/lib64/pkcs11/opensc-pkcs11.so" example.com
+Enter PIN for 'SSH key':
+[example.com] $
+
+
+
+https://access.redhat.com/articles/3034441
+/etc/pam_pkcs11/pam_pkcs11.conf
+
+use_pkcs11_module = opensc;
+pkcs11_module opensc {
+    [...]
+nss_dir = /etc/pki/nssdb;
+
+
+rpm -q pcsc-lite
+
+opensc-tool --list-readers
+
+opensc-tool --reader 0 --name -v
+
+pkcs11-tool  --module /usr/lib64/opensc-pkcs11.so  –O
+
+# pkcs11-tool  --module /usr/lib64/opensc-pkcs11.so --list-slots
+# pkcs11-tool  --module /usr/lib64/opensc-pkcs11.so  --slot 1 --list-objects
+# pkcs11-tool  --module /usr/lib64/opensc-pkcs11.so -l -O --id 4
+# pkcs11-tool  --module /usr/lib64/opensc-pkcs11.so  --show-info
+# pkcs11-tool  --module /usr/lib64/opensc-pkcs11.so --list-mechanisms
+
+lwpkcs11
+lwsc
+
+https://fedoramagazine.org/fedora-28-better-smart-card-support-openssh/
+
+ssh-keygen -D /usr/lib64/pkcs11/opensc-pkcs11.so
+
+ssh -vvv -I /usr/lib64/pkcs11/opensc-pkcs11.so example.com
+
+pkcs11-tool --module opensc-pkcs11.so --list-slots
+
+ssh-keygen -D /usr/lib64/pkcs11/opensc-pkcs11.so
+

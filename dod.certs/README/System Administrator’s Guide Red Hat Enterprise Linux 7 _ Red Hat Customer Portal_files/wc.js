@@ -1,0 +1,2 @@
+define(["https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.4.3/custom-elements-es5-adapter.js","https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.4.3/webcomponents-bundle.js"],function(){return{include:function(e){chrometwo_require(["public_modules/"+e])}}});
+//# sourceMappingURL=wc.js.map
